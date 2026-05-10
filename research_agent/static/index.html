@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Research Agent</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="brand-text">
+                <h2>AI Research Agent</h2>
+                <p>Intelligent Research Assistant</p>
+            </div>
+        </div>
+
+        <h3 class="section-label">MCP Connections</h3>
+        <div class="mcp-group">
+            <div class="mcp-card">
+                <div class="mcp-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="mcp-info">
+                    <h4>Web Search MCP</h4>
+                    <span id="search-status" class="status-indicator disconnected">Disconnected</span>
+                </div>
+                <i class="fas fa-chevron-right chevron"></i>
+            </div>
+
+            <div class="mcp-card">
+                <div class="mcp-icon">
+                    <i class="fas fa-file-alt" style="color: #a855f7;"></i>
+                </div>
+                <div class="mcp-info">
+                    <h4>TXT Download MCP</h4>
+                    <span id="txt-status" class="status-indicator disconnected">Disconnected</span>
+                </div>
+                <i class="fas fa-chevron-right chevron"></i>
+            </div>
+
+            <div class="mcp-card">
+                <div class="mcp-icon">
+                    <i class="fas fa-file-pdf" style="color: #ef4444;"></i>
+                </div>
+                <div class="mcp-info">
+                    <h4>PDF Download MCP</h4>
+                    <span id="pdf-status" class="status-indicator disconnected">Disconnected</span>
+                </div>
+                <i class="fas fa-chevron-right chevron"></i>
+            </div>
+        </div>
+
+        <div class="mcp-card" style="margin-top: 2rem; border-color: rgba(59, 130, 246, 0.3);">
+            <div class="mcp-icon icon-blue">
+                <i class="fas fa-shield-halved"></i>
+            </div>
+            <div class="mcp-info">
+                <h4 style="font-size: 0.8rem;">Secure & Reliable</h4>
+                <p style="font-size: 0.65rem; color: var(--text-secondary);">All connections are encrypted and safe.</p>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <p>© 2026 AI Research Agent</p>
+            <p>Powered by Gemini 2.5 Flash</p>
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        <div id="landing-page" class="main-container">
+            <div class="hero">
+                <h1>AI <span>Research</span> Assistant</h1>
+                <p>Generate comprehensive research summaries powered by Gemini 2.5 Flash</p>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="topic-input" placeholder="Enter research topic (e.g., Quantum Computing in 2024)">
+                <button id="generate-btn">
+                    <i class="fas fa-sparkles"></i>
+                    Generate Research
+                </button>
+            </div>
+
+            <div id="error-message" class="error-box hidden" style="margin-bottom: 2rem; text-align: center;"></div>
+
+            <div id="loading-section" class="hidden" style="text-align: center; margin-bottom: 4rem;">
+                <div class="spinner"></div>
+                <p>Analyzing and synthesizing information...</p>
+            </div>
+
+            <div class="section-label" style="text-align: center; margin-bottom: 2rem;">How it works</div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon icon-blue">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>1. Search</h3>
+                    <p>We search the web for relevant and credible information via MCP.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-purple">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>2. Analyze</h3>
+                    <p>AI analyzes and synthesizes the most important insights for you.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-green">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3>3. Summarize</h3>
+                    <p>Get a well-structured, comprehensive research summary.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon icon-orange">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>4. Export</h3>
+                    <p>Export your research as TXT or PDF with one click.</p>
+                </div>
+            </div>
+
+            <div class="mcp-card" style="margin-top: 4rem; max-width: 800px; width: 100%;">
+                <div class="mcp-icon icon-purple">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <div class="mcp-info">
+                    <p style="font-size: 0.9rem;">Ask anything, explore deeply, and let AI handle the research for you.</p>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary);">Powered by advanced AI and real-time web data.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-container">
+            <div class="results-header">
+                <h2 id="result-topic">Research Topic</h2>
+                <div class="action-buttons" style="display: flex; gap: 1rem;">
+                    <button id="export-txt-btn" class="secondary-btn" style="background: rgba(51, 65, 85, 0.5); color: white; border-color: var(--card-border);">
+                        <i class="fas fa-file-alt"></i> TXT
+                    </button>
+                    <button id="export-pdf-btn" class="secondary-btn" style="background: rgba(51, 65, 85, 0.5); color: white; border-color: var(--card-border);">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </button>
+                    <button id="back-btn" class="secondary-btn" style="background: transparent; color: var(--text-secondary); border: none;">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+            <div id="mcp-sync-notice" class="info-box hidden" style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent-blue); padding: 1rem 2rem;"></div>
+            <div class="results-content">
+                <div id="research-content" class="markdown-body"></div>
+            </div>
+            <div class="results-footer" style="padding: 1.5rem 2.5rem; background: rgba(15, 23, 42, 0.4); display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.8rem;">
+                <span id="result-timestamp"></span>
+                <span id="result-wordcount"></span>
+            </div>
+        </section>
+    </main>
+
+    <script src="static/app.js"></script>
+</body>
+</html>
